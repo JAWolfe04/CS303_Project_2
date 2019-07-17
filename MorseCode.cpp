@@ -30,19 +30,29 @@ MorseCode::MorseCode(std::string fileName)
 
 BTNode<char>* MorseCode::createDecoder()
 {
-	BTNode<char>* root = new BTNode<char>(' ', new BTNode<char>('e'), new BTNode<char>('t'));
+	BTNode<char>* root = new BTNode<char>(' ', new BTNode<char>('e'), new BTNode<char>('t')); //created binary tree
 	root->left->left = new BTNode<char>('i', new BTNode<char>('s'), new BTNode<char>('u'));
 	root->left->left->left->left = new BTNode<char>('h');
 	root->left->left->left->right = new BTNode<char>('v');
-	//if ()
-
-	//Binary_Tree<Item_Type> left = new BTNode<Item_Type>;
+	root->left->left->right->left = new BTNode<char>('f');
+	root->left->right = new BTNode<char>('a', new BTNode<char>('r'), new BTNode<char>('w'));
+	root->left->right->left->left = new BTNode<char>('l');
+	root->left->right->right->left = new BTNode<char>('p');
+	root->left->right->right->right = new BTNode<char>('j');
+	root->right->left = new BTNode<char>('n', new BTNode<char>('d'), new BTNode<char>('k'));
+	root->right->left->left->left = new BTNode<char>('b');
+	root->right->left->left->right = new BTNode<char>('x');
+	root->right->left->right->left = new BTNode<char>('c');
+	root->right->left->right->left = new BTNode<char>('y');
+	root->right->right = new BTNode<char>('m', new BTNode<char>('g'), new BTNode<char>('o'));
+	root->right->right->left->left = new BTNode<char>('z');
+	root->right->right->left->right = new BTNode<char>('q');
 
 	// Create a null node for the root of the decoder tree. 
 	// Replicate the tree in the project example. Using the root, use (->right) and (->left) to mark where 
 	// each of the 26 letters of the alphabet is on that tree and assign it to the new node of that letter
 	// Return the root
-	return nullptr;
+	return root;
 }
 
 std::string MorseCode::encode(std::string message)
