@@ -2,24 +2,23 @@
 #include "BTNode.h"
 #include <iostream>
 #include <fstream>
-
+#include <map>
 using namespace std;
 MorseCode::MorseCode(std::string fileName)
 {
 	ifstream fin(fileName);
-	char ch;
-	string s;
+	char letter;
+	string morse;
 	if (!fin)									//throw error if can't open file
 		cout << "Error opening input file!";
 	
-	//BTNode<Item_Type>* root = NULL;
-	
 	while (!fin.eof())
 	{
-		fin >> ch;
-		getline(fin,s);
+		fin >> letter;
+		getline(fin,morse);
 		
-		//Insert function to build the tree?
+		//createDecoder(ch, s);
+		encoder.insert(pair<char, string>(letter, morse)); //inserting the values read in, into a map
 	}
 	// Open the morse code data file using fileName (make sure to validate that it is opened correctly)
 	// Populate the Encoder using bracket assignment from the data in the file extracting each line of the file
@@ -31,7 +30,13 @@ MorseCode::MorseCode(std::string fileName)
 
 BTNode<char>* MorseCode::createDecoder()
 {
-	//localRoot = new BTNode<Item_Type>;
+	BTNode<char>* root = new BTNode<char>(' ', new BTNode<char>('e'), new BTNode<char>('t'));
+	root->left->left = new BTNode<char>('i', new BTNode<char>('s'), new BTNode<char>('u'));
+	root->left->left->left->left = new BTNode<char>('h');
+	root->left->left->left->right = new BTNode<char>('v');
+	//if ()
+
+	//Binary_Tree<Item_Type> left = new BTNode<Item_Type>;
 
 	// Create a null node for the root of the decoder tree. 
 	// Replicate the tree in the project example. Using the root, use (->right) and (->left) to mark where 
