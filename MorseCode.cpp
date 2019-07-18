@@ -85,11 +85,3 @@ char MorseCode::findLetter(std::string code)
     return 0;
 }
 
-BTNode<char>* MorseCode::createDecoder()
-{
-    // Create a null node for the root of the decoder tree. 
-    // Replicate the tree in the project example. Using the root, use (->right) and (->left) to mark where 
-    // each of the 26 letters of the alphabet is on that tree and assign it to the new node of that letter
-    // Return the root
-    return nullptr;
-}
