@@ -13,6 +13,7 @@ MorseCode::MorseCode(std::string fileName)
         cout << "Error opening input file!";
 	
     while (!fin.eof())
+
     {
         fin >> letter;
         getline(fin,morse);
@@ -44,7 +45,7 @@ BTNode<char>* MorseCode::createDecoder()
     root->right->left->left->left = new BTNode<char>('b');
     root->right->left->left->right = new BTNode<char>('x');
     root->right->left->right->left = new BTNode<char>('c');
-    root->right->left->right->left = new BTNode<char>('y');
+    root->right->left->right->right = new BTNode<char>('y');
     root->right->right = new BTNode<char>('m', new BTNode<char>('g'), new BTNode<char>('o'));
     root->right->right->left->left = new BTNode<char>('z');
     root->right->right->left->right = new BTNode<char>('q');
@@ -58,30 +59,71 @@ BTNode<char>* MorseCode::createDecoder()
 
 std::string MorseCode::encode(std::string message)
 {
-    // Create an empty string to hold the encoded message
-    // For each letter in the message, get the code for each letter from the encoder and concatonate that to the 
-    // string, followed by a space
-    // Make sure to convert each letter of the message to lowercase before getting the code for the letter
-    // Return the encoded message
-    return std::string();
+    
+	string morse = "";
+
+	//Convert each character in message to lowercase and find and find it in the map
+	for (int i = 0; i < message.length(); i++) {
+		char currChar = tolower(message[i]);
+		map<char, string>::iterator itr = encoder.find(currChar);
+
+		//Add morse code corresponding to the character to the morse code string, followed by a space
+		string currString;
+		if (itr != encoder.end())
+			currString = itr->second;
+		else
+			throw ("Character not found");
+		morse += currString;
+		morse += ' ';
+	}
+	return morse;
 }
 
 std::string MorseCode::decode(std::string message)
 {
-    // Create an empty string to hold the decoded message.
-    // For each code segment from the message which is separated by spaces, concatonate the decoded 
-    // message with the corresponding letter using the findLetter function
-    // Return the decoded message 
-    return std::string();
+    
+	string decoded = "";
+	string fragment = "";
+
+	//For each character in the morse code message, add to fragment if it is not a space
+	for (int i = 0; i < message.length(); i++) {
+		if (message[i] != ' ')
+			fragment += message[i];
+
+		//If character is a space, find the letter corresponding to the fragment in the binary tree, add to decoded string
+		//Reset the fragment as an empty string for the next character
+		else {
+			char currChar = findLetter(fragment);
+			decoded += currChar;
+			fragment = "";
+		}
+	}
+	return decoded;
 }
 
 char MorseCode::findLetter(std::string code)
 {
-    // Get a pointer to the root of the decoder tree 
-    // Check to make sure that the morse code string is at most the height of the tree ( <= 4 ). If not, return an error. 
-    // For each character in the morse code string, check if it is a dot or dash. If it is a dot, move to the left tree. 
-    // If it is a dash, move to the right tree.
-    // If the node returned is not null, return the data at the node. Else, throw an error. 
-    return 0;
+    //Create pointer to the root of the decoder tree
+	BTNode<char>* localRoot = decoder.getRoot();
+
+	//The max height of the tree is 4, so any code length greater than that is invalid
+	if (code.length() > 4 )
+		throw("Invalid string length");
+
+	//If the character in code is '.', move to left child. If it is '_', move to right. If neither, it is invalid
+	for (int i = 0; i < code.length(); i++) {
+		if (code[i] == '.')
+			localRoot = localRoot->left;
+		else if (code[i] == '_')
+			localRoot = localRoot->right;
+		else
+			throw("Invalid character");
+	}
+
+	//Return the character at the resulting node, if there is one
+	if (localRoot != NULL)
+		return localRoot->data;
+	else
+		throw("Invalid code");
 }
 

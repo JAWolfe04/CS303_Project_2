@@ -1,3 +1,5 @@
+#include "MorseCode.h"
+#include <iostream>
 
 int main()
 {
@@ -10,6 +12,6 @@ int main()
     //Prints out the encoded and decoded message
     std::cout << encodedMessage << " = " << 
         morseCode.decode(encodedMessage) << std::endl;
-
+	system("pause");
     return 0;
 }
