@@ -21,11 +21,9 @@ MorseCode::MorseCode(std::string fileName)
         //createDecoder(ch, s);
         encoder.insert(pair<char, string>(letter, morse)); //inserting the values read in, into a map
 	}
-    // Open the morse code data file using fileName (make sure to validate that it is opened correctly)
-    // Populate the Encoder using bracket assignment from the data in the file extracting each line of the file
-    // into a string variable and separating the string by the first character and the remaining substring
-    // Make sure to close the file
-    // Populate the decoder by setting the root of the tree using the createDecoder function.
+	//O(1)-- T(n)= 26
+	//the alphabet will never change so it will always be the same steps
+   
     fin.close();
     decoder.setRoot(createDecoder());
 }
@@ -49,11 +47,9 @@ BTNode<char>* MorseCode::createDecoder()
     root->right->right = new BTNode<char>('m', new BTNode<char>('g'), new BTNode<char>('o'));
     root->right->right->left->left = new BTNode<char>('z');
     root->right->right->left->right = new BTNode<char>('q');
-
-    // Create a null node for the root of the decoder tree. 
-    // Replicate the tree in the project example. Using the root, use (->right) and (->left) to mark where 
-    // each of the 26 letters of the alphabet is on that tree and assign it to the new node of that letter
-    // Return the root
+    //O(1) --- T(17)
+    //Creating the tree will always be the same steps
+   
     return root;
 }
 
