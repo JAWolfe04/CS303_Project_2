@@ -1,3 +1,6 @@
+//---------------------------------------------------------------------------------------
+// Taken from BTNode.h provided by Mohammad Kuhail, kuhailm@Umkc.edu
+//---------------------------------------------------------------------------------------
 #pragma once
 
 #include <sstream>
@@ -22,6 +25,7 @@ struct BTNode
     virtual ~BTNode() {}
 
     // to_string
+    //O(1)
     virtual std::string to_string() const {
         std::ostringstream os;
         os << data;
@@ -29,6 +33,7 @@ struct BTNode
     }
 
     // Overloading the ostream insertion operator
+    //O(1)
     friend std::ostream& operator<<(std::ostream& out,
         const BTNode<Item_Type>& node) {
         return out << node.to_string();

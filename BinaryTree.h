@@ -1,3 +1,6 @@
+//---------------------------------------------------------------------------------------
+// Taken from Binary_Tree.h provided by Mohammad Kuhail, kuhailm@Umkc.edu
+//---------------------------------------------------------------------------------------
 #pragma once
 
 #include "BTNode.h"
@@ -93,14 +96,14 @@ public:
     }
 
 
-
+    //O(n) : n is the size of the tree
     int height() const {
         if (is_null()) return 0;
         return 1 + std::max(get_left_subtree().height(), get_right_subtree().height());
     }
 
 
-
+    //O(n) : n is the size of the tree
     int number_of_nodes() const {
         if (is_null()) return 0;
         return 1 + get_left_subtree().number_of_nodes()
@@ -222,6 +225,7 @@ bool Binary_Tree<Item_Type>::is_leaf() const {
 }
 
 /** Return a string representation of this tree */
+// O(n) : n is the number of nodes
 template<typename Item_Type>
 std::string Binary_Tree<Item_Type>::to_string() const {
     std::ostringstream os;
@@ -239,6 +243,7 @@ std::string Binary_Tree<Item_Type>::to_string() const {
 while (st.has_more_tokens()) {
     string term = st.next_token();*/
 
+//O(n) : n is the size of the text
 template<typename Item_Type>
 void Binary_Tree<Item_Type>::read_tree(std::vector<std::string>& text) {
     int i = 0;
@@ -287,6 +292,7 @@ read_binary_tree(std::istream& in) {
 
 
 /** Return a pre-order traversal of the tree */
+// O(n) : visits every node once, n is the number of nodes
 template<typename Item_Type>
 std::string Binary_Tree<Item_Type>::pre_order(const BTNode<Item_Type>* local_root) const {
     std::string result;
@@ -306,6 +312,7 @@ std::string Binary_Tree<Item_Type>::pre_order(const BTNode<Item_Type>* local_roo
 
 
 /** Return a post-order traversal of the tree */
+// O(n) : visits every node once, n is the number of nodes
 template<typename Item_Type>
 std::string Binary_Tree<Item_Type>::post_order(const BTNode<Item_Type>* local_root) const {
     std::string result;
@@ -325,6 +332,7 @@ std::string Binary_Tree<Item_Type>::post_order(const BTNode<Item_Type>* local_ro
 
 
 /** Return an in-order traversal of the tree */
+// O(n) : visits every node once, n is the number of nodes
 template<typename Item_Type>
 std::string Binary_Tree<Item_Type>::in_order(const BTNode<Item_Type>* local_root) const {
     std::string result;
